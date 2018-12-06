@@ -1,17 +1,20 @@
 import pygame
 class View():
 	def __init__(self, model):
-		screen_size = (800, 600)
+		screen_size = (800, 600)		#Sets screen size
 		self.screen = pygame.display.set_mode(screen_size, 32)
+
+		#Initializes the lists for Mario moving left and right
 		self.marioImagesRight = []
 		self.marioImagesLeft = []
-		self.cycle = 0
-		self.count = 0
 		self.marioImagesLeftArray =  ["mariobackwards1.png","mariobackwards2.png","mariobackwards3.png","mariobackwards4.png","mariobackwards5.png",]
 		self.marioImagesRightArray = ["mariofrontwards1.png", "mariofrontwards2.png", "mariofrontwards3.png", "mariofrontwards4.png", "mariofrontwards5.png"]
+		#Loads the images from the above arrays to each appropriate array slot
 		for i in range(4):
 			self.marioImagesRight.append(pygame.image.load(self.marioImagesRightArray[i]))
 			self.marioImagesLeft.append(pygame.image.load(self.marioImagesLeftArray[i]))
+
+		#Loads the initial Mario, ground, background, coin blocks, coins, and brick images
 		self.marioImage = pygame.image.load("mariofrontwards1.png")
 		self.floorImage = pygame.image.load("dirtGround.png")
 		self.floorImage = pygame.transform.scale(self.floorImage, (2000, 1000))
@@ -20,9 +23,12 @@ class View():
 		self.coins = pygame.image.load("coin.png")
 		self.bricks = pygame.transform.scale(self.floorImage, (100, 100))
 		self.backgroundImage = pygame.image.load("Background.png")
+
+		self.cycle = 0			#Cycles through the pictures
 		self.model = model
-		self.switching = -1
+		self.switching = -1		#Allows for Mario to switch
 		
+	#Update Method
 	def update(self):
 		self.screen.fill([0, 200, 100])
 		self.mario = self.model.sprites[0]
